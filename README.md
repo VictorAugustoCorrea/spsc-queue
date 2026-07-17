@@ -64,7 +64,7 @@ Each field sits in its own `alignas(64)` cache line — producer and consumer ne
 5,000,000 messages, default build. Tens-of-nanoseconds latency requires dedicated physical cores per thread — see checklist below.
 
 | metric      | result                |
-|-------------|------------------------|
+|-------------|-----------------------|
 | correctness | exact order, 0 losses |
 | throughput  | ~9.0M msgs/s          |
 | capacity    | 65536 slots           |
@@ -81,11 +81,11 @@ Each field sits in its own `alignas(64)` cache line — producer and consumer ne
 
 ## Files
 
-| file             | description                                        |
-|------------------|-----------------------------------------------------|
-| `spsc_queue.hpp` | the queue — header-only, ~150 lines                |
-| `benchmark.cpp`  | throughput, p50–p99.9 latency, correctness check   |
-| `Makefile`       | build flags                                        |
+| file             | description                                      |
+|------------------|--------------------------------------------------|
+| `spsc_queue.hpp` | the queue — header-only, ~150 lines              |
+| `benchmark.cpp`  | throughput, p50–p99.9 latency, correctness check |
+| `Makefile`       | build flags                                      |
 
 ## License
 
