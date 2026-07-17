@@ -8,12 +8,14 @@
 #include <algorithm>
 #include <x86intrin.h>
 
-struct Message {
-    uint64_t send_tsc;
-    uint64_t seq;
-    double price;
-    uint32_t symbol_id;
-};
+namespace {
+    struct Message {
+        uint64_t send_tsc;
+        uint64_t seq;
+        double price;
+        uint32_t symbol_id;
+    };
+}
 
 static_assert(std::is_trivially_copyable_v<Message>);
 
@@ -38,10 +40,10 @@ int main() {
 
         for (uint64_t i = 0; i < KNumMsgs; ++i) {
             Message m {
-                rdtsc(),
-                i,
-                100.25 + static_cast<double>(i % 100) * 0.01,
-                static_cast<uint32_t>(i % 500)
+                .send_tsc = rdtsc(),
+                .seq = i,
+                .price = 100.25 + static_cast<double>(i % 100) * 0.01,
+                .symbol_id = static_cast<uint32_t>(i % 500)
             };
             while (!queue.try_push(m)) { }
         }
@@ -81,7 +83,7 @@ int main() {
     const auto wall_end = std::chrono::steady_clock::now();
 
     const double secs  = std::chrono::duration<double>(wall_end - wall_start).count();
-    const double msgs_per_sec = KNumMsgs/ secs;
+    const double msgs_per_sec = KNumMsgs / secs;
 
     std::sort(latencies_cycles.begin(), latencies_cycles.end());
     const uint64_t c0 = rdtsc();
