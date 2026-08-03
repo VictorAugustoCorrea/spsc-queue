@@ -72,7 +72,7 @@ private:
     alignas(CACHE_LINE_SIZE) std::atomic<size_t> head_{0};
     alignas(CACHE_LINE_SIZE) size_t cached_tail_{0};
     alignas(CACHE_LINE_SIZE) std::atomic<size_t> tail_{0};
-    alignas(CACHE_LINE_SIZE) std:: size_t cached_head_{0};
+    alignas(CACHE_LINE_SIZE) std::size_t cached_head_{0};
     alignas(CACHE_LINE_SIZE) T buffer_[Capacity];
 
 };
